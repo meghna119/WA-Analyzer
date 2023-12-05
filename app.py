@@ -5,7 +5,7 @@ import helper
 import matplotlib.pyplot as plt
 import matplotlib
 plt.rcParams["figure.figsize"] = (10, 6)
-matplotlib.use('TkAgg')
+#matplotlib.use('TkAgg')
 import seaborn as sns
 
 
