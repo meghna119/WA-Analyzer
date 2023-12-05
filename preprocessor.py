@@ -29,9 +29,9 @@ def preprocess(data):
 
             messages.append(entry[0])
 
-print("Before setting 'user' column:", len(users), len(df))
-df['user'] = users
-print("After setting 'user' column:", len(df))
+    print("Before setting 'user' column:", len(users), len(df))
+    df['user'] = users
+    print("After setting 'user' column:", len(df))
 
     df['user'] = users
     df['message'] = messages
