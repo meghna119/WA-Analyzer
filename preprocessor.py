@@ -27,7 +27,7 @@ def preprocess(data):
             else:
                 print("'group_notification' not found in users")
 
-        messages.append(entry[0])
+            messages.append(entry[0])
 
 print("Before setting 'user' column:", len(users), len(df))
 df['user'] = users
