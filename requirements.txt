@@ -1,0 +1,13 @@
+streamlit
+vaderSentiment
+nltk
+helper
+matplotlib
+seaborn
+urlextract
+wordcloud
+pandas
+emoji
+preprocessor
+re
+regex
