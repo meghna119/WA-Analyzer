@@ -21,7 +21,11 @@ def preprocess(data):
             users.append(entry[1])
             messages.append(" ".join(entry[2:]))
         else:
-            users.append('group_notification')
+            if 'group_notification' in user_list:
+                user_list.remove('group_notification')
+            else:
+                print("'group_notification' not found in user_list")
+            
             messages.append(entry[0])
 
     df['user'] = users
