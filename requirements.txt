@@ -11,3 +11,4 @@ emoji
 preprocessor
 re
 regex
+SentimentIntensityAnalyzer
