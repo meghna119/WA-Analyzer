@@ -21,8 +21,8 @@ def preprocess(data):
             users.append(entry[1])
             messages.append(" ".join(entry[2:]))
         else:
-            if 'group_notification' in user_list:
-                user_list.remove('group_notification')
+            if 'group_notification' in users:
+                users.remove('group_notification')
             else:
                 print("'group_notification' not found in user_list")
             
@@ -55,7 +55,7 @@ def preprocess(data):
     return df
 
 
-    #
+    
     def extract_emojis(text):
         emoji_pattern = regex.compile("["
                                       u"\U0001F600-\U0001F64F"  # emoticons
@@ -65,46 +65,7 @@ def preprocess(data):
                                       "]+", flags=regex.UNICODE)
         emojis = ''.join(emoji_pattern.findall(text))
         return emojis
-    #
-    # def map_emoji_sentiments(emojis):
-    #     positive_emojis = ['😊', '😄', '😃', '🤣', '😂']  # Define positive emojis
-    #     negative_emojis = ['😢', '😞', '😔', '😭']  # Define negative emojis
-    #     neutral_emojis = ['😐', '😑', '😶']  # Define neutral emojis
-    #
-    #     # Check sentiment for each emoji individually
-    #     positive_count = sum(1 for emoji in emojis if emoji in positive_emojis)
-    #     negative_count = sum(1 for emoji in emojis if emoji in negative_emojis)
-    #     neutral_count = sum(1 for emoji in emojis if emoji in neutral_emojis)
-    #
-    #     # Determine sentiment based on counts
-    #     if positive_count > negative_count and positive_count > neutral_count:
-    #         return 'Positive'
-    #     elif negative_count > positive_count and negative_count > neutral_count:
-    #         return 'Negative'
-    #     else:
-    #         return 'Neutral'
-    #
-    # # def map_emoji_sentiments(emojis):
-    # #     happy_emojis = ['😊', '😄', '😃', '🤣', '😂']  # Define your happy emojis
-    # #     sad_emojis = ['😢', '😞', '😔', '😭']  # Define your sad emojis
-    # #     neutral_emojis = ['😐','😑','😶']
-    # #
-    # #
-    # #     # Your logic to map emojis to sentiments (e.g., happy, sad, neutral)
-    # #     if emojis in happy_emojis:
-    # #         return 'Happy'
-    # #     elif emojis in sad_emojis:
-    # #         return 'Sad'
-    # #     elif emojis in neutral_emojis:
-    # #         return 'Neutral'
-    # #     else:
-    # #         return 'Undetermined'
-    # #
-    # #
-    # df['emojis'] = df['message'].apply(extract_emojis)  # Extract emojis
-    # df['emoji_sentiments'] = df['emojis'].apply(map_emoji_sentiments)
-    #
-
+   
 
     sentiment_scores = []
     for message in df['message']:
