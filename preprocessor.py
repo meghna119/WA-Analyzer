@@ -29,9 +29,11 @@ def preprocess(data):
 
             messages.append(entry[0])
 
-    print("Before setting 'user' column:", len(users), len(df))
-    df['user'] = users
-    print("After setting 'user' column:", len(df))
+    # Make sure the length of 'users' matches the number of rows in the DataFrame
+    if len(users) == len(df):
+        df['user'] = users
+    else:
+        print("Length mismatch: len(users) != len(df)")
 
     df['user'] = users
     df['message'] = messages
