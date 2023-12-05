@@ -49,28 +49,32 @@ def most_busy_users(df):
         columns={'index': 'name', 'user': 'percent'})
     return x,df
 
-def create_wordcloud(selected_user,df):
+def create_wordcloud(selected_user, df):
+    extractor = URLExtract()
 
-     f = open('stop_words.txt', 'r')
-     stop_words = f.read()
+    # Read stop words from a file
+    with open('stop_words.txt', 'r') as f:
+        stop_words = f.read()
 
-     if selected_user != 'Overall':
-         df = df[df['user'] == selected_user]
+    if selected_user != 'Overall':
+        df = df[df['user'] == selected_user]
 
-     temp = df[df['user'] != 'group_notification']
-     temp = temp[temp['message'] != '<Media omitted>\n']
+    temp = df[df['user'] != 'group_notification']
+    temp = temp[temp['message'] != '<Media omitted>\n']
 
-     def remove_stop_words(message):
+    def remove_stop_words(message):
         y = []
-        for word in message.lower().split():
-            if word not in stop_words:
+        words = message.lower().split()
+        for word in words:
+            if word not in stop_words and not extractor.has_urls(word):
                 y.append(word)
         return " ".join(y)
 
-     wc = WordCloud(width=500,height=500,min_font_size=10,background_color='white')
-     temp['message'] = temp['message'].apply(remove_stop_words)
-     df_wc = wc.generate(temp['message'].str.cat(sep=" "))
-     return df_wc
+    wc = WordCloud(width=500, height=500, min_font_size=10, background_color='white')
+    temp['message'] = temp['message'].apply(remove_stop_words)
+    wordcloud = wc.generate(temp['message'].str.cat(sep=" "))
+    return wordcloud
+
 
 def most_common_words(selected_user,df):
 
