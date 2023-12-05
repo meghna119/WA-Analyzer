@@ -10,7 +10,7 @@ def preprocess(data):
 
     df = pd.DataFrame({'user_message': messages, 'message_date': dates})
     # convert message_date type
-    df['message_date'] = pd.to_datetime(df['message_date'], format='%d/%m/%Y, %H:%M - ')
+    df['message_date'] = pd.to_datetime(df['message_date'], format='%d/%m/%y, %H:%M - ')
     df.rename(columns={'message_date': 'date'}, inplace=True)
 
     users = []
@@ -21,10 +21,8 @@ def preprocess(data):
             users.append(entry[1])
             messages.append(" ".join(entry[2:]))
         else:
-            if 'group_notification' in users:
-                users.remove('group_notification')
-            else:
-                print("'group_notification' not found in user_list")
+            users.remove('group_notification')
+            
             
             messages.append(entry[0])
 
