@@ -23,8 +23,15 @@ def preprocess(data):
         else:
             if 'group_notification' in users:
                 users.remove('group_notification')
+                print("Removed 'group_notification'")
             else:
                 print("'group_notification' not found in users")
+
+        messages.append(entry[0])
+
+print("Before setting 'user' column:", len(users), len(df))
+df['user'] = users
+print("After setting 'user' column:", len(df))
 
     df['user'] = users
     df['message'] = messages
