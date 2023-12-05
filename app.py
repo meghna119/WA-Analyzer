@@ -4,7 +4,8 @@ import pandas as pd
 import helper
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.use('TkAgg')
+plt.rcParams["figure.figsize"] = (10, 6)
+#matplotlib.use('TkAgg')
 import seaborn as sns
 
 
