@@ -29,10 +29,15 @@ def preprocess(data):
 
             messages.append(entry[0])
 
+    # Check lengths
+    print("Length of users list:", len(users))
+    print("Number of rows in the DataFrame (df):", len(df))
+
     # Make sure the length of 'users' matches the number of rows in the DataFrame
     if len(users) == len(df):
         df['user'] = users
     else:
+        print("Length mismatch: len(users) != len(df)")
         print("Length mismatch: len(users) != len(df)")
 
     df['user'] = users
