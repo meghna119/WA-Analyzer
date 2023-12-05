@@ -9,36 +9,21 @@ def preprocess(data):
     dates = re.findall(pattern, data)
 
     df = pd.DataFrame({'user_message': messages, 'message_date': dates})
-    # convert message_date type
     df['message_date'] = pd.to_datetime(df['message_date'], format='%d/%m/%y, %H:%M - ')
     df.rename(columns={'message_date': 'date'}, inplace=True)
 
     users = []
     messages = []
+
     for message in df['user_message']:
         entry = re.split('([\w\W]+?):\s', message)
         if entry[1:]:  # user name
             users.append(entry[1])
             messages.append(" ".join(entry[2:]))
         else:
-            if 'group_notification' in users:
-                users.remove('group_notification')
-                print("Removed 'group_notification'")
-            else:
-                print("'group_notification' not found in users")
-
+            # If 'group_notification' is not found, consider it as a system message
+            users.append('system')
             messages.append(entry[0])
-
-    # Check lengths
-    print("Length of users list:", len(users))
-    print("Number of rows in the DataFrame (df):", len(df))
-
-    # Make sure the length of 'users' matches the number of rows in the DataFrame
-    if len(users) == len(df):
-        df['user'] = users
-    else:
-        print("Length mismatch: len(users) != len(df)")
-        print("Length mismatch: len(users) != len(df)")
 
     df['user'] = users
     df['message'] = messages
