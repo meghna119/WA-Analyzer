@@ -147,8 +147,6 @@ def month_activity_map(selected_user,df):
 
     return df['month'].value_counts()
 
-import seaborn as sns
-import pandas as pd
 
 def activity_heatmap(selected_user, df):
     if selected_user != 'Overall':
