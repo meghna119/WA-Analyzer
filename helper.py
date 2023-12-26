@@ -147,9 +147,8 @@ def month_activity_map(selected_user,df):
 
     return df['month'].value_counts()
 
-
-
-
+import seaborn as sns
+import pandas as pd
 
 def activity_heatmap(selected_user, df):
     if selected_user != 'Overall':
@@ -157,31 +156,25 @@ def activity_heatmap(selected_user, df):
 
     user_heatmap = df.pivot_table(index='day_name', columns='period', values='message', aggfunc='count').fillna(0)
 
-    # 1. Check for Empty DataFrames
+    # Check for Empty DataFrames
     if user_heatmap.empty:
         print("user_heatmap is empty")
         return None  # You can return None or handle it based on your app's logic
 
-    # 2. Print Debug Information
-    print("Original user_heatmap:")
-    print(user_heatmap)
-    print("Original user_heatmap shape:", user_heatmap.shape)
-    print("Data types before conversion:")
-    print("Index:", user_heatmap.index.dtype)
-    print("Columns:", user_heatmap.columns.dtype)
-
-    # 3. Ensure Numeric Data
+    # Ensure Numeric Data
     user_heatmap = user_heatmap.astype(float)
 
-    # 4. Print Debug Information after conversion
-    print("user_heatmap after conversion:")
-    print(user_heatmap)
-    print("user_heatmap shape after conversion:", user_heatmap.shape)
+    # Convert index and columns to numeric explicitly
+    user_heatmap.index = pd.to_numeric(user_heatmap.index, errors='coerce')
+    user_heatmap.columns = pd.to_numeric(user_heatmap.columns, errors='coerce')
+
+    # Check the shape and data types after conversion
+    print("user_heatmap shape:", user_heatmap.shape)
     print("Data types after conversion:")
     print("Index:", user_heatmap.index.dtype)
     print("Columns:", user_heatmap.columns.dtype)
 
-    # 5. Proceed with creating the heatmap
+    # Proceed with creating the heatmap
     try:
         ax = sns.heatmap(user_heatmap)
     except ValueError as e:
@@ -189,6 +182,12 @@ def activity_heatmap(selected_user, df):
         return None  # You can return None or handle it based on your app's logic
 
     return ax
+
+
+
+
+
+
 
 
 
