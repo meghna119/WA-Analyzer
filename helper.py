@@ -147,9 +147,9 @@ def month_activity_map(selected_user,df):
 
     return df['month'].value_counts()
 
-def activity_heatmap(selected_user,df):
 
-  
+
+def activity_heatmap(selected_user, df):
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
 
@@ -157,17 +157,19 @@ def activity_heatmap(selected_user,df):
 
     # 1. Check for Empty DataFrames
     if user_heatmap.empty:
-        # Handle the case when user_heatmap is empty, for example, by returning a default value or logging a message.
-        return None  # You can modify this based on your app's logic
+        # Handle the case when user_heatmap is empty
+        print("user_heatmap is empty")
+        return None  # You can return None or handle it based on your app's logic
 
     # 2. Print Debug Information
     print(user_heatmap)
 
-    # 3. Check Data Types
+    # 3. Ensure Numeric Data
     user_heatmap = user_heatmap.astype(float)
 
-    # 4. Handling NaN Values
-    user_heatmap = user_heatmap.fillna(0)
+    # 4. Check Data Types of Index and Columns
+    user_heatmap.index = pd.to_numeric(user_heatmap.index, errors='coerce')
+    user_heatmap.columns = pd.to_numeric(user_heatmap.columns, errors='coerce')
 
     # 5. Adjust Heatmap Parameters
     try:
@@ -175,7 +177,7 @@ def activity_heatmap(selected_user,df):
     except ValueError as e:
         # Handle the case when there's an issue with the format of user_heatmap
         print(f"Error: {e}")
-        return None  # You can modify this based on your app's logic
+        return None  # You can return None or handle it based on your app's logic
 
     return ax
 
