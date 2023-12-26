@@ -149,10 +149,7 @@ def month_activity_map(selected_user,df):
 
 def activity_heatmap(selected_user,df):
 
-    
-    # Assuming this is the activity_heatmap function in helper.py
-
-
+  
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
 
@@ -173,9 +170,15 @@ def activity_heatmap(selected_user,df):
     user_heatmap = user_heatmap.fillna(0)
 
     # 5. Adjust Heatmap Parameters
-    ax = sns.heatmap(user_heatmap, vmin=user_heatmap.values.min(), vmax=user_heatmap.values.max())
+    try:
+        ax = sns.heatmap(user_heatmap, annot=True, fmt=".1f", cmap="YlGnBu")
+    except ValueError as e:
+        # Handle the case when there's an issue with the format of user_heatmap
+        print(f"Error: {e}")
+        return None  # You can modify this based on your app's logic
 
     return ax
+
 
 
 def analyze_sentiment(df, classifier):
