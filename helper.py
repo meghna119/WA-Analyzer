@@ -150,6 +150,7 @@ def month_activity_map(selected_user,df):
 
 
 def activity_heatmap(selected_user, df):
+    
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
 
@@ -157,12 +158,12 @@ def activity_heatmap(selected_user, df):
 
     # 1. Check for Empty DataFrames
     if user_heatmap.empty:
-        # Handle the case when user_heatmap is empty
         print("user_heatmap is empty")
         return None  # You can return None or handle it based on your app's logic
 
     # 2. Print Debug Information
     print(user_heatmap)
+    print(user_heatmap.shape)
 
     # 3. Ensure Numeric Data
     user_heatmap = user_heatmap.astype(float)
@@ -171,19 +172,10 @@ def activity_heatmap(selected_user, df):
     user_heatmap.index = pd.to_numeric(user_heatmap.index, errors='coerce')
     user_heatmap.columns = pd.to_numeric(user_heatmap.columns, errors='coerce')
 
-    # Additional Debug Information
-    print(f"Shape of user_heatmap: {user_heatmap.shape}")
-
-    # 5. Validate if it's a 2D DataFrame
-    if len(user_heatmap.shape) != 2:
-        print("Invalid shape of user_heatmap. Must be a 2D DataFrame.")
-        return None
-
-    # 6. Adjust Heatmap Parameters
+    # 5. Proceed with creating the heatmap
     try:
-        ax = sns.heatmap(user_heatmap, annot=True, fmt=".1f", cmap="YlGnBu")
+        ax = sns.heatmap(user_heatmap)
     except ValueError as e:
-        # Handle the case when there's an issue with the format of user_heatmap
         print(f"Error: {e}")
         return None  # You can return None or handle it based on your app's logic
 
