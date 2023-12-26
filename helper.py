@@ -149,8 +149,9 @@ def month_activity_map(selected_user,df):
 
 
 
+
+
 def activity_heatmap(selected_user, df):
-    
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
 
@@ -162,15 +163,23 @@ def activity_heatmap(selected_user, df):
         return None  # You can return None or handle it based on your app's logic
 
     # 2. Print Debug Information
+    print("Original user_heatmap:")
     print(user_heatmap)
-    print(user_heatmap.shape)
+    print("Original user_heatmap shape:", user_heatmap.shape)
+    print("Data types before conversion:")
+    print("Index:", user_heatmap.index.dtype)
+    print("Columns:", user_heatmap.columns.dtype)
 
     # 3. Ensure Numeric Data
     user_heatmap = user_heatmap.astype(float)
 
-    # 4. Check Data Types of Index and Columns
-    user_heatmap.index = pd.to_numeric(user_heatmap.index, errors='coerce')
-    user_heatmap.columns = pd.to_numeric(user_heatmap.columns, errors='coerce')
+    # 4. Print Debug Information after conversion
+    print("user_heatmap after conversion:")
+    print(user_heatmap)
+    print("user_heatmap shape after conversion:", user_heatmap.shape)
+    print("Data types after conversion:")
+    print("Index:", user_heatmap.index.dtype)
+    print("Columns:", user_heatmap.columns.dtype)
 
     # 5. Proceed with creating the heatmap
     try:
