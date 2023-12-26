@@ -153,6 +153,11 @@ def activity_heatmap(selected_user,df):
         df = df[df['user'] == selected_user]
 
     user_heatmap = df.pivot_table(index='day_name', columns='period', values='message', aggfunc='count').fillna(0)
+    user_heatmap = user_heatmap.fillna(0)
+
+    
+    user_heatmap = user_heatmap.astype(float)
+
 
     return user_heatmap
 
