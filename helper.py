@@ -171,7 +171,15 @@ def activity_heatmap(selected_user, df):
     user_heatmap.index = pd.to_numeric(user_heatmap.index, errors='coerce')
     user_heatmap.columns = pd.to_numeric(user_heatmap.columns, errors='coerce')
 
-    # 5. Adjust Heatmap Parameters
+    # Additional Debug Information
+    print(f"Shape of user_heatmap: {user_heatmap.shape}")
+
+    # 5. Validate if it's a 2D DataFrame
+    if len(user_heatmap.shape) != 2:
+        print("Invalid shape of user_heatmap. Must be a 2D DataFrame.")
+        return None
+
+    # 6. Adjust Heatmap Parameters
     try:
         ax = sns.heatmap(user_heatmap, annot=True, fmt=".1f", cmap="YlGnBu")
     except ValueError as e:
