@@ -149,17 +149,23 @@ def month_activity_map(selected_user,df):
 
 def activity_heatmap(selected_user,df):
 
+    
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
 
     user_heatmap = df.pivot_table(index='day_name', columns='period', values='message', aggfunc='count').fillna(0)
+
+    # Additional Modifications
+    # 1. Check for NaN Values
     user_heatmap = user_heatmap.fillna(0)
 
-    
+    # 2. Check Data Types
     user_heatmap = user_heatmap.astype(float)
 
+    # 3. Adjust Heatmap Parameters
+    ax = sns.heatmap(user_heatmap, vmin=user_heatmap.values.min(), vmax=user_heatmap.values.max())
 
-    return user_heatmap
+    return ax
 
 def analyze_sentiment(df, classifier):
     opinions = {'positive': 0, 'negative': 0, 'neutral': 0}
