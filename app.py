@@ -23,12 +23,7 @@ if uploaded_file is not None:
     # fetch unique users
     user_list = df['user'].unique().tolist()
 
-    # Check if 'group_notification' is in user_list before removing
-    if 'group_notification' in user_list:
-        user_list.remove('group_notification')
-    else:
-        st.sidebar.warning("'group_notification' not found in users")
-
+   
     user_list.sort()
     user_list.insert(0, "Overall")
 
