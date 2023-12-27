@@ -154,11 +154,11 @@ def activity_heatmap(selected_user, df):
     user_heatmap = user_heatmap.fillna(-1)
 
     # Create the heatmap using the placeholder value for missing data
-    fig, ax = plt.subplots(figsize=(10, 6))  # Specify the figsize
+    fig, ax = plt.subplots()
     sns.heatmap(user_heatmap, cmap='viridis', vmin=-1, vmax=user_heatmap.max().max(), ax=ax)
 
-    return fig
-
+    # Display the Matplotlib figure in Streamlit
+    st.pyplot(fig)
 
 
 def analyze_sentiment(df, classifier):
