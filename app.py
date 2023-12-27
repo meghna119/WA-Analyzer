@@ -8,6 +8,7 @@ plt.rcParams["figure.figsize"] = (10, 6)
 #matplotlib.use('TkAgg')
 import seaborn as sns
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 st.sidebar.title("Whatsapp Chat Analyzer")
