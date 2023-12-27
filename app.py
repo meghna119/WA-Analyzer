@@ -93,6 +93,7 @@ if uploaded_file is not None:
 
         st.title("Weekly Activity Map")
         user_heatmap = helper.activity_heatmap(selected_user,df)
+        st.image(user_heatmap, width=800)
         fig,ax = plt.subplots()
         ax = sns.heatmap(user_heatmap)
         st.pyplot(fig)
