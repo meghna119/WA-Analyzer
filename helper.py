@@ -8,15 +8,11 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from nltk.sentiment import SentimentIntensityAnalyzer
 import nltk
 
-import matplotlib as plt
-matplotlib.use('Agg')
-
+import matplotlib
 import seaborn as sns
 sns.set(style="whitegrid")
 
-
 nltk.download('vader_lexicon')
-
 
 extract = URLExtract()
 
