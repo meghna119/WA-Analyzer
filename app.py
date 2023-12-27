@@ -2,13 +2,14 @@ import streamlit as st
 import preprocessor
 import pandas as pd
 import helper
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
 import matplotlib.pyplot as plt
 import matplotlib
 plt.rcParams["figure.figsize"] = (10, 6)
 #matplotlib.use('TkAgg')
 import seaborn as sns
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 st.sidebar.title("Whatsapp Chat Analyzer")
