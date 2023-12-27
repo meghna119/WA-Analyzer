@@ -232,6 +232,3 @@ def monthly_timeline_with_sentiment(selected_user, df):
 
 
 
-
-
-
