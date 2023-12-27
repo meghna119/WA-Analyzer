@@ -7,7 +7,7 @@ import emoji
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from nltk.sentiment import SentimentIntensityAnalyzer
 import nltk
-import streamlit as st
+
 import matplotlib
 import seaborn as sns
 sns.set(style="whitegrid")
@@ -144,21 +144,14 @@ def month_activity_map(selected_user,df):
     return df['month'].value_counts()
 
 
-def activity_heatmap(selected_user, df):
+def activity_heatmap(selected_user,df):
+
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
 
-    user_heatmap = df.pivot_table(index='day_name', columns='period', values='message', aggfunc='count')
+    user_heatmap = df.pivot_table(index='day_name', columns='period', values='message', aggfunc='count').fillna(0)
 
-    # Replace NaN values with a placeholder value (e.g., -1)
-    user_heatmap = user_heatmap.fillna(-1)
-
-    # Create the heatmap using the placeholder value for missing data
-    fig, ax = plt.subplots()
-    sns.heatmap(user_heatmap, cmap='viridis', vmin=-1, vmax=user_heatmap.max().max(), ax=ax)
-
-    # Display the Seaborn heatmap in Streamlit using st.pyplot
-    st.pyplot(fig)
+    return user_heatmap
 
 
 def analyze_sentiment(df, classifier):
