@@ -7,7 +7,7 @@ import emoji
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from nltk.sentiment import SentimentIntensityAnalyzer
 import nltk
-
+import streamlit as st
 import matplotlib
 import seaborn as sns
 sns.set(style="whitegrid")
@@ -157,7 +157,7 @@ def activity_heatmap(selected_user, df):
     fig, ax = plt.subplots()
     sns.heatmap(user_heatmap, cmap='viridis', vmin=-1, vmax=user_heatmap.max().max(), ax=ax)
 
-    # Display the Matplotlib figure in Streamlit
+    # Display the Seaborn heatmap in Streamlit using st.pyplot
     st.pyplot(fig)
 
 
